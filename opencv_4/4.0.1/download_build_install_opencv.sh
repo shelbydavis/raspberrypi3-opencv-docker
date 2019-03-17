@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPENCV_VERSION=4.0.0
+OPENCV_VERSION=4.0.1
 
 WS_DIR=`pwd`
 mkdir opencv
@@ -24,7 +24,13 @@ mkdir build && cd build
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
   -D CMAKE_INSTALL_PREFIX=/usr/local \
   -D OPENCV_EXTRA_MODULES_PATH=$OPENCV_CONTRIB_MODULES_SRC_DIR \
-  -D OPENCV_PYTHON2_INSTALL_PATH=/usr/local/lib/python2.7/site-packages/ \
+  -D OPENCV_PYTHON2_INSTALL_PATH=/usr/local/lib/python3.7/site-packages/ \
+  -D ENABLE_NEON=ON \
+  -D ENABLE_VFPV3=ON \
+  -D BUILD_TESTS=OFF \
+  -D OPENCV_ENABLE_NONFREE=ON \
+  -D INSTALL_PYTHON_EXAMPLES=OFF \
+  -D BUILD_EXAMPLES=OFF \
   ..
 
 make -j4
@@ -38,7 +44,7 @@ if [ $? -eq 0 ]; then
     echo "OpenCV installed successfully! ........................."
 else
     echo "OpenCV installation failed :( ........................."
-    SITE_PACKAGES_DIR=/usr/local/lib/python2.7/site-packages
+    SITE_PACKAGES_DIR=/usr/local/lib/python3.7/site-packages
     echo "$SITE_PACKAGES_DIR contents: "
     echo `ls -ltrh $SITE_PACKAGES_DIR`
     echo "Note: temporary installation dir $WS_DIR/opencv is not removed!"

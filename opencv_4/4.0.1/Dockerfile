@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-python:2.7
+FROM balenalib/raspberrypi3-debian-python:3.7-stretch-build
 
 RUN cwd=$(pwd)
 
@@ -39,7 +39,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN pip install --no-cache-dir \
     # OpenCV dependency
     numpy \
-    # other usefull stuff
+    # other useful stuff
     ipython \
     # cleanup
     && find /usr/local \
